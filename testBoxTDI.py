@@ -67,14 +67,6 @@ def isEquimodular(A, tol=1e-9):
 def rank(M, tol=1e-9):
     return np.linalg.matrix_rank(M, tol)
 
-def affinely_independent(points, tol=1e-9):
-    if len(points) <= 1:
-        return False
-
-    P = np.array(points, dtype=float)
-    D = P[1:] - P[0]
-    return rank(D, tol) == len(points) - 1
-
 def print_progress(start_time, total, checked, bar_width=40):
         frac = checked / total
         filled = int(bar_width * frac)
@@ -94,16 +86,17 @@ def isPolyhedronBoxTDI(A, b, vertices, tol=1e-9, bar_width=40):
     V = [np.asarray(v, dtype=float) for v in vertices]
 
     n, m = A.shape
+    at_most = min(n,m)
 
     # numero totale di sottoinsiemi di righe
-    total = sum(comb(n, r) for r in range(1, n + 1))
+    total = sum(comb(n, r) for r in range(1, at_most + 1))
     checked = 0
 
     tested_faces = []
     start_time = time.time()
 
     
-    for r in range(1, n + 1):
+    for r in range(1, at_most + 1):
         for rows in itertools.combinations(range(n), r):
             checked += 1
             if checked % 50 == 0 or checked == total:
@@ -170,12 +163,12 @@ def isPolyhedronBoxTDI2(A, b, vertices, tol=1e-9, bar_width = 40):
     V = [np.asarray(v, dtype=float) for v in vertices]
 
     n, m = A.shape
-
-    total = sum(comb(n, r) for r in range(1, n + 1))
+    at_most = min(n,m)
+    total = sum(comb(n, r) for r in range(1, at_most + 1))
     checked = 0
     start_time = time.time()
 
-    for r in range(1, n + 1):
+    for r in range(1, at_most + 1):
         for rows in itertools.combinations(range(n), r):
             checked += 1
             if checked % 50 == 0 or checked == total:
