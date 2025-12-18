@@ -24,7 +24,7 @@ edgeRelaxationRHS = edgeRelaxation.edgeRelaxationEdgeColoringRHS(n_vertices, n_e
 vertices = verticesFinder.polyVertices(edgeRelxationMatrix, edgeRelaxationRHS)
 for v in vertices:
     print(v)
-    
 
+# testBoxTDI.isPolyhedronBoxTDI1(edgeRelxationMatrix,edgeRelaxationRHS,vertices)
 # testBoxTDI.isPolyhedronBoxTDI2(edgeRelxationMatrix,edgeRelaxationRHS,vertices)
 testParallelBoxTDI.isBoxTDI_parallel(edgeRelxationMatrix,edgeRelaxationRHS,vertices)
