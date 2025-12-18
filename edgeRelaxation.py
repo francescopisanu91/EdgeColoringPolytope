@@ -26,11 +26,11 @@ def M_k(G_edges, n_vertices, k):
     I = I_k(G_edges, k)
     return np.vstack([A, I])
 
-def edgeRelaxationMatrix(G_edges, n_vertices, k):
+def edgeRelaxationEdgeColoringMatrix(G_edges, n_vertices, k):
     M = M_k(G_edges, n_vertices, k)
     m = len(G_edges)
     return np.vstack([M, -np.eye(k*m)])
 
-def edgeRelaxationRHS(n_vertices,n_edges,k):
+def edgeRelaxationEdgeColoringRHS(n_vertices,n_edges,k):
     return np.hstack([np.ones(k*n_vertices+n_edges),np.zeros(k*n_edges)])
 
