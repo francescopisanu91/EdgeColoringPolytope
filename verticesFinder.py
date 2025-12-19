@@ -21,3 +21,18 @@ def polyVertices(A, b):
     return vertices
 
 
+def split_integral_fractional(vertices, tol=1e-9):
+    integer_points = []
+    fractional_points = []
+
+    for v in vertices:
+        v = np.asarray(v, dtype=float)
+
+        # controlla se tutte le componenti sono (quasi) intere
+        if np.all(np.abs(v - np.round(v)) <= tol):
+            integer_points.append(v.astype(int))
+        else:
+            fractional_points.append(v)
+
+    return integer_points, fractional_points
+
